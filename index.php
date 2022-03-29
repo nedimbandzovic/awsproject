@@ -15,7 +15,7 @@ Flight::route('POST /register', function () {
     $email=Flight::request()->data->email;
     $phone=Flight::request()->data->phone;
 
-    if (strlen($username)<=3){
+    if (strlen($username)<3){
       return Flight::json(array(
         'status'=>'error',
         'message'=>'The username is too short'
@@ -45,8 +45,8 @@ Flight::route('POST /login', function () {
     $password=Flight::request()->data->password;
 
     return Flight::json(array(
-      'status'=>'Successful',
-      'message'=>'Welcome to the platform;'
+      'status'=>'error',
+      'message'=>'User has not been found'
     ));
     die();
 
