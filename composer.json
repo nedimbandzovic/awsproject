@@ -13,7 +13,8 @@
     ],
     "require": {
         "php": "^7.4|^8.0|^8.1",
-        "ext-json": "*"
+        "ext-json": "*",
+        "zircote/swagger-php": "3.0"
     },
     "autoload": {
         "files": [ "flight/autoload.php", "flight/Flight.php" ]

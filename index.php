@@ -8,7 +8,24 @@ ini_set('display_errors', 0);
 Flight::route('/hello', function () {
     echo 'Hello to the world from Nedim!';
 });
-
+    /**
+     * @OA\Post(
+     *     path="/register",
+     *     tags={"user"},
+     *     summary="Register user",
+     *     description="This can only be done by the logged in user.",
+     *     operationId="registerUser",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Create user object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/RegisterModel")
+     *     )
+     * )
+     */
 Flight::route('POST /register', function () {
     $username=Flight::request()->data->username;
     $password=Flight::request()->data->password;
@@ -40,6 +57,24 @@ Flight::route('POST /register', function () {
 
 
 });
+  /**
+     * @OA\Post(
+     *     path="/login",
+     *     tags={"user"},
+     *     summary="Log in user",
+     *     description="This can only be done by the logged in user.",
+     *     operationId="Log in",
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Login object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/LoginModel")
+     *     )
+     * )
+     */
 Flight::route('POST /login', function () {
     $username=Flight::request()->data->username;
     $password=Flight::request()->data->password;
