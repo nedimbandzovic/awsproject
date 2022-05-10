@@ -15,7 +15,8 @@
         "php": "^7.4|^8.0|^8.1",
         "ext-json": "*",
         "zircote/swagger-php": "3.0",
-        "spomky-labs/otphp": "^10.0"
+        "spomky-labs/otphp": "^10.0",
+        "swiftmailer/swiftmailer": "6.0"
     },
     "autoload": {
         "files": [ "flight/autoload.php", "flight/Flight.php" ]
