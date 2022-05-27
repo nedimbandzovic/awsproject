@@ -1,6 +1,7 @@
 <?php
 
 require 'flight/Flight.php';
+require_once 'DB.php';
 //Hiding errors
 error_reporting(0);
 ini_set('display_errors', 0);
@@ -31,29 +32,30 @@ Flight::route('POST /register', function () {
     $password=Flight::request()->data->password;
     $email=Flight::request()->data->email;
     $phone=Flight::request()->data->phone;
-
-    if (strlen($username)<3){
-      return Flight::json(array(
-        'status'=>'error',
-        'message'=>'The username is too short'
-      ));
-      die();
-    }
+    DB::register($username, $password, $email, $phone);
+     if (strlen($username)<3){
+       return Flight::json(array(
+         'status'=>'error',
+         'message'=>'The username is too short'
+       ));
+       die();
+     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
-      return Flight::json(array(
+       return Flight::json(array(
 
-        'status'=>'error',
+         'status'=>'error',
         'message'=>'The email is not in supported format'
       ));
-      die();
-
-    }
-    return Flight::json(array(
+       die();
+     }
+     return Flight::json(array(
 
       'status'=>'Successful',
-      'message'=>'Registration successful'
+    'message'=>'Registration successful'
     ));
-    die();
+     die();
+
+   
 
 
 });
