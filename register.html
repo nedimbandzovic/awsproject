@@ -46,12 +46,16 @@
 </div>
 </div>
   <div class="container signin">
-    <p>Already have an account? <a href="#">Sign in</a>.</p>
+    <p>Already have an account? <a href="#" id="login_redirect">Sign in</a>.</p>
   </div>
 
 <script>
  document.getElementById("sform").addEventListener("click", function(event){
   event.preventDefault();
+});
+
+document.getElementById("login_redirect").addEventListener("click", function(event){
+  window.location.href="http://127.0.0.1/22-cen343-nedim-b/login.html";
 });
 </script> 
 </body>

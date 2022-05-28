@@ -1,6 +1,6 @@
 <?php
 
-require 'flight/Flight.php';
+//require 'flight/Flight.php';
 require_once 'DB.php';
 require_once 'password_checker.php';
 //Hiding errors
@@ -34,11 +34,8 @@ Flight::route('POST /register', function () {
     $email=Flight::request()->data->email;
     $phone=Flight::request()->data->phone;
     $test=PasswordChecker::password_checker($password);
-
     
-    DB::register($username, $password, $email, $phone);
-
-     if (strlen($username)<3){
+  if (strlen($username)<3){
        return Flight::json(array(
          'status'=>'error',
          'message'=>'The username is too short'
@@ -68,6 +65,8 @@ Flight::route('POST /register', function () {
       ));
        die();
      }
+     DB::register($username, $password, $email, $phone);
+
      return Flight::json(array(
 
       'status'=>'Successful',
@@ -77,11 +76,8 @@ Flight::route('POST /register', function () {
      die();
 
 
-   
-
-
 });
-  /**
+ /**
      * @OA\Post(
      *     path="/login",
      *     tags={"user"},
@@ -99,13 +95,17 @@ Flight::route('POST /register', function () {
      *     )
      * )
      */
-Flight::route('POST /login', function () {
-    $username=Flight::request()->data->username;
-    $password=Flight::request()->data->password;
-    DB::login($username,$password);
+    Flight::route('POST /login', function () {
+      $username=Flight::request()->data->username;
+      $password=Flight::request()->data->password;
+      DB::login($username,$password);
+  
+  });
+  
+  Flight::route('GET /confirm/@token', function ($token) {
+    DB::confirm($token);
+    
 
 });
-
-
 
 Flight::start();
