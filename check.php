@@ -12,13 +12,15 @@ curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($verify);
 // var_dump($response);
 $responseData = json_decode($response);
-print_r($responseData);
+
 
 if($responseData->success) {
-    // your success code goes here
+    echo "Captcha successfully solved, you will be redirected to login page";
+    header('Refresh: 10; URL=http://127.0.0.1/22-cen343-nedim-b/login.html');
 } 
 else {
-   // return error to user; they did not pass
+    echo "Failed";
+
 }
 ?>
 </pre>

@@ -33,6 +33,7 @@ class DB {
       echo ('User is found');
     } else{
       echo ('User not found');
+      exit();
     }
 
 

@@ -50,7 +50,7 @@ function submit() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost/22-cen343-nedim-b/register",
+        url: "http://127.0.0.1/22-cen343-nedim-b/register",
         data: formdata,
         cache: false,
         async: true,
@@ -72,22 +72,32 @@ function login_submit() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     var formdata = 'username=' + username + '&password=' + password;
+    console.log(formdata);
 
     $.ajax({
         type: "POST",
-        url: "http://localhost/22-cen343-nedim-b/login",
+        url: "http://127.0.0.1/22-cen343-nedim-b/login",
         data: formdata,
         cache: false,
         async: true,
         success: function (response) {
-            alert(JSON.stringify("Welcome to our platform"));
-            window.location.href = "welcome.html";
+
+            switch (response) {
+                case 'User not found':
+                    alert(JSON.stringify(response));
+                    break;
+
+                default:
+                    alert(JSON.stringify(response));
+                    window.location.href = "welcome.html";
+            }
+
 
         },
         error: function (response) {
-            setTimeout(function () {
-                alert(JSON.stringify(response))
-            }, 1000);
+            alert(JSON.stringify(response));
+
+
         }
     });
 

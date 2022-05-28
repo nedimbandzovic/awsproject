@@ -36,7 +36,7 @@ Flight::route('POST /register', function () {
     $test=PasswordChecker::password_checker($password);
 
     
-    //DB::register($username, $password, $email, $phone);
+    DB::register($username, $password, $email, $phone);
 
      if (strlen($username)<3){
        return Flight::json(array(
