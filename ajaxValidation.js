@@ -55,13 +55,13 @@ function submit() {
         cache: false,
         async: true,
         success: function (response) {
-            console.log("Ovo je email:" + JSON.stringify(response));
+            alert(JSON.stringify(response));
 
         },
         error: function (response) {
-            setTimeout(function () {
-                alert(JSON.stringify(response))
-            }, 1000);
+            alert(JSON.stringify(response));
+
+
         }
     });
 
@@ -80,6 +80,7 @@ function login_submit() {
         cache: false,
         async: true,
         success: function (response) {
+            alert(JSON.stringify("Welcome to our platform"));
             window.location.href = "welcome.html";
 
         },

@@ -71,8 +71,7 @@ Flight::route('POST /register', function () {
      return Flight::json(array(
 
       'status'=>'Successful',
-    'message'=>'Registration successful',
-    'test'=>$test
+    'message'=>'Registration successful'
    
     ));
      die();
