@@ -67,3 +67,29 @@ function submit() {
 
     return false;
 }
+
+function login_submit() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    var formdata = 'username=' + username + '&password=' + password;
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost/22-cen343-nedim-b/login",
+        data: formdata,
+        cache: false,
+        async: true,
+        success: function (response) {
+            window.location.href = "welcome.html";
+
+        },
+        error: function (response) {
+            setTimeout(function () {
+                alert(JSON.stringify(response))
+            }, 1000);
+        }
+    });
+
+    return false;
+
+}

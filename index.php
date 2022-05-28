@@ -2,6 +2,7 @@
 
 require 'flight/Flight.php';
 require_once 'DB.php';
+require_once 'password_checker.php';
 //Hiding errors
 error_reporting(0);
 ini_set('display_errors', 0);
@@ -32,7 +33,11 @@ Flight::route('POST /register', function () {
     $password=Flight::request()->data->password;
     $email=Flight::request()->data->email;
     $phone=Flight::request()->data->phone;
-    DB::register($username, $password, $email, $phone);
+    $test=PasswordChecker::password_checker($password);
+
+    
+    //DB::register($username, $password, $email, $phone);
+
      if (strlen($username)<3){
        return Flight::json(array(
          'status'=>'error',
@@ -40,6 +45,21 @@ Flight::route('POST /register', function () {
        ));
        die();
      }
+     if ($test){
+      return Flight::json(array(
+        'status'=>'error',
+        'message'=>'The password is not safe'
+      ));
+      die();
+
+     }
+     if (strlen($password)<8){
+      return Flight::json(array(
+        'status'=>'error',
+        'message'=>'The password must have 8 characters'
+      ));
+      die();
+    }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
        return Flight::json(array(
 
@@ -51,9 +71,12 @@ Flight::route('POST /register', function () {
      return Flight::json(array(
 
       'status'=>'Successful',
-    'message'=>'Registration successful'
+    'message'=>'Registration successful',
+    'test'=>$test
+   
     ));
      die();
+
 
    
 
@@ -80,13 +103,7 @@ Flight::route('POST /register', function () {
 Flight::route('POST /login', function () {
     $username=Flight::request()->data->username;
     $password=Flight::request()->data->password;
-
-    return Flight::json(array(
-      'status'=>'error',
-      'message'=>'User has not been found'
-    ));
-    die();
-
+    DB::login($username,$password);
 
 });
 
