@@ -84,6 +84,9 @@ function verification_submit() {
                 window.location.href = "http://127.0.0.1/22-cen343-nedim-b/sms.html";
             } else if (response == 'QR') {
                 window.location.href = "http://127.0.0.1/22-cen343-nedim-b/qrcode.html";
+            } else if (response == 'null') {
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/welcome.html";
+
             }
         },
         error: function (response) {
@@ -233,23 +236,20 @@ function login_submit() {
         cache: false,
         async: true,
         success: function (response) {
+            if (response == 'SMS') {
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/sms.html";
+            } else if (response == 'QR') {
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/qrcode.html";
+            } else if (response == 'null') {
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/welcome.html";
 
-            switch (response) {
-                case 'User not found':
-                    alert(JSON.stringify(response));
-                    break;
-
-                default:
-                    alert(JSON.stringify(response));
-                    window.location.href = "welcome.html";
+            } else {
+                alert('Try again, please');
             }
-
-
         },
         error: function (response) {
-            alert(JSON.stringify(response));
-
-
+            var status = 'Try again please';
+            alert(status);
         }
     });
 
@@ -272,6 +272,7 @@ function status_submit() {
         success: function (response) {
             alert('Status changed successfully');
             window.location.href = "welcome.html";
+            localStorage.clear();
 
 
 
