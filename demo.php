@@ -4,8 +4,8 @@
 // A sample PHP Script to POST data using cURL
 
  $data = array(
-     'from' => 'Nedim',
-     'text' => 'Četvorica jednog vodi četiri se jednog boji',
+     'from' => 'OurPlatform',
+     'text' => '',
      'to' => '38761648664',
      'api_key' => 'f68f2ebe',
      'api_secret' => 'l5B7VZ1xVqWDlHKy'

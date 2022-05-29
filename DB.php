@@ -2,7 +2,10 @@
 
 
 require_once 'vendor/autoload.php';
+error_reporting(0);
+ini_set('display_errors', 0);
 
+use OTPHP\TOTP;
 class DB {
   protected $connection;
 
@@ -32,7 +35,7 @@ $mailer = new Swift_Mailer($transport);
 $message = (new Swift_Message('Welcome to Our Platform'))
   ->setFrom(['nedim.bandzovic@stu.ibu.edu.ba' => 'OurPlatform'])
   ->setTo([$email])
-  ->setBody('Welcome to our platform. Please confirm your account by clicking on http://127.0.0.1/22-cen343-nedim-b/confirm/'.$token);
+  ->setBody('Welcome to our platform. Please confirm your account by clicking on http://127.0.0.1 s/22-cen343-nedim-b/confirm/'.$token);
   ;
 
 // Send the message
@@ -53,12 +56,86 @@ $result = $mailer->send($message);
       echo ('User not found');
       exit();
     }
+}
+  public static function generate_secret_db ($username){
+    $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $otp = TOTP::create();
+    $secret=$otp->getSecret();
+    $query="UPDATE users SET otp='$secret' WHERE username='$username'";
+    $connection->query($query);
+}
+
+public static function get_secret_db($username){
+  $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $query=("SELECT otp FROM users WHERE username='$username'");
+    $sth = $connection->prepare($query);
+    $sth->execute();
+    $result = $sth->fetchColumn();
+    return $result;
+
+}
+
+   public static function generate_secret ($username){
+    $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $secret=DB::get_secret_db($username);
+    $otp = TOTP::create($secret);
+    $current_otp=$otp->now();
+    $query=("UPDATE users SET otp_number='$current_otp' WHERE username='$username'");
+    $connection->query($query);
+
+
+    $otp->setLabel('nedim@ibu');
+$grCodeUri = $otp->getQrCodeUri(
+    'https://api.qrserver.com/v1/create-qr-code/?data=[DATA]&size=300x300&ecc=M',
+    '[DATA]'
+);
+
+    echo $grCodeUri;
+
+
+  
+
+   }
+
+   public static function getQRcode($username){
+    $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $query=("SELECT otp_number FROM users WHERE username='$username'");
+    $sth = $connection->prepare($query);
+    $sth->execute();
+    $result = $sth->fetchColumn();
+    echo $result;
+
+
+   }
+
+  public static function get ($username){
+    $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $query=("SELECT 2fa FROM users WHERE username='$username'");
+    $sth = $connection->prepare($query);
+    $sth->execute();
+    $result = $sth->fetchColumn();
+    echo $result;
+}
+
+public static function set_2fa_status ($username, $status){
+
+    $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $query="UPDATE users SET 2fa='$status' WHERE username='$username'";
+    $connection->query($query);
+    echo "Your status is '$status', wait for 10 seconds to be redirected";
+
+    header('Refresh: 10; URL=http://127.0.0.1/22-cen343-nedim-b/login.html');
 
 
     
   }
-
-  public static function confirm($token){
+public static function confirm($token){
 
     $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

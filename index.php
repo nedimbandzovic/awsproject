@@ -108,4 +108,34 @@ Flight::route('POST /register', function () {
 
 });
 
+Flight::route('GET /confirm/@username/@status', function ($username,$status) {
+  DB::set_2fa_status($username,$status);
+  
+
+});
+
+Flight::route('GET /get/@username', function ($username) {
+  DB::get($username);
+  
+
+});
+
+Flight::route('GET /getSecret/@username', function ($username) {
+  DB::generate_secret($username);
+  
+
+});
+
+Flight::route('GET /getQRnumber/@username', function ($username) {
+  DB::getQRCode($username);
+  
+
+});
+
+
+
+
+
+
+
 Flight::start();

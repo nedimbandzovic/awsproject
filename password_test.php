@@ -1,3 +1,4 @@
+
 <?php
 
 require 'vendor/autoload.php';
@@ -7,10 +8,10 @@ ini_set('display_errors', 0);
 
 use OTPHP\TOTP;
 
-// $otp = TOTP::create();
-// echo "The OTP secret is: {$otp->getSecret()}\n";
+$otp = TOTP::create();
+echo "The OTP secret is: {$otp->getSecret()}\n";
 
-$secret="TSRHYPFZYJVH6RRPYKCVENKQ6TL3ZH2Y7ZKTLD7QAQMMFPPGS6BJSOB6NQO5WP5HQETGTLB65QNLKDLNBIOKBJZCLV5B7HYUYZG2PJY";
+//$secret="TSRHYPFZYJVH6RRPYKCVENKQ6TL3ZH2Y7ZKTLD7QAQMMFPPGS6BJSOB6NQO5WP5HQETGTLB65QNLKDLNBIOKBJZCLV5B7HYUYZG2PJY";
 
 $secret = $secret;
 $otp = TOTP::create($secret);
@@ -25,4 +26,3 @@ echo "<img src='{$grCodeUri}'>";
 
 $otp = TOTP::create($secret);
 $otp->verify($input);
-

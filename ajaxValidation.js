@@ -68,6 +68,104 @@ function submit() {
     return false;
 }
 
+function verification_submit() {
+
+    var username = localStorage.getItem("user_username");
+    var formdata = 'username=' + username;
+
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1/22-cen343-nedim-b/get/" + username,
+        data: formdata,
+        cache: false,
+        async: true,
+        success: function (response) {
+            if (response == 'SMS') {
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/sms.html";
+            } else if (response == 'QR') {
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/qrcode.html";
+            }
+        },
+        error: function (response) {
+            alert("Assure your login form is ok");
+
+
+        }
+    });
+
+    return false;
+
+
+}
+
+function qrCodeCheck() {
+
+    var username = localStorage.getItem("user_username");
+    var qrcode = localStorage.getItem("qrcode");
+    var formdata = 'username=' + username;
+
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1/22-cen343-nedim-b/getQRnumber/" + username,
+        data: formdata,
+        cache: false,
+        async: true,
+        success: function (response) {
+            if (response == qrcode) {
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/welcome.html";
+            }
+        },
+
+        error: function (response) {
+            alert(JSON.stringify(response));
+
+
+        }
+    });
+
+    return false;
+
+
+}
+
+function logout() {
+
+    localStorage.clear();
+    window.location.href = "http://127.0.0.1/22-cen343-nedim-b/login.html";
+
+
+}
+
+
+function secret() {
+
+    var username = localStorage.getItem("user_username");
+    var formdata = 'username=' + username;
+
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1/22-cen343-nedim-b/getSecret/" + username,
+        data: formdata,
+        cache: false,
+        async: true,
+        success: function (response) {
+            localStorage.setItem("imageUri", response);
+        },
+
+        error: function (response) {
+            alert(JSON.stringify(response));
+
+
+        }
+    });
+
+    return false;
+
+
+}
+
+
+
 function login_submit() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
@@ -91,6 +189,36 @@ function login_submit() {
                     alert(JSON.stringify(response));
                     window.location.href = "welcome.html";
             }
+
+
+        },
+        error: function (response) {
+            alert(JSON.stringify(response));
+
+
+        }
+    });
+
+    return false;
+
+}
+
+function status_submit() {
+    var username = localStorage.getItem("user_username");
+    var status = localStorage.getItem("value");
+    var formdata = 'username=' + username + '&status=' + status;
+    console.log(formdata);
+
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1/22-cen343-nedim-b/confirm/" + username + "/" + status,
+        data: formdata,
+        cache: false,
+        async: true,
+        success: function (response) {
+            alert('Status changed successfully');
+            window.location.href = "welcome.html";
+
 
 
         },

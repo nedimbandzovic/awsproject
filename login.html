@@ -33,7 +33,7 @@
 
 </form>
 <div class="container signin">
-  <button type="submit"  class="btn btn-success" name="login" id="loginBtn" onclick="login_submit()">Login</button>
+  <button type="submit"  class="btn btn-success" name="login" id="loginBtn" onclick="verification_submit();">Login</button>
   <div class="container signin">
     <p>Don't have an account? <a href="#" id="register_redirect">Register</a>.</p>
   </div>
@@ -55,16 +55,25 @@
 document.getElementById("register_redirect").addEventListener("click", function(event){
   window.location.href="http://127.0.0.1/22-cen343-nedim-b/register.html";
 });
+
+
+
+
 </script>
 <script type="text/javascript">
   let CountButtonHomeClicks = 0;
 
   loginBtn.addEventListener("click", function() {
+    localStorage.setItem("user_username", document.getElementById("username").value);
+
   CountButtonHomeClicks += 1;
   console.log(CountButtonHomeClicks);
 
   if (CountButtonHomeClicks==3){
     document.getElementById("myCaptcha").setAttribute("style", "display:block");
+    document.getElementById("loginBtn").setAttribute("style", "display:none");
+
+
     
     document.getElementById("captchaContainer").setAttribute("style", "display:block");
 
