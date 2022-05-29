@@ -98,6 +98,60 @@ function verification_submit() {
 
 }
 
+function generateSMScode() {
+
+    var username = localStorage.getItem("user_username");
+    var formdata = 'username=' + username;
+
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1/22-cen343-nedim-b/getSMScode/" + username,
+        data: formdata,
+        cache: false,
+        async: true,
+        success: function (response) {
+            alert('Message sent');
+        },
+        error: function (response) {
+            alert("Message not sent");
+
+
+        }
+    });
+
+    return false;
+
+
+}
+
+function smsCheck() {
+
+    var username = localStorage.getItem("user_username");
+    var sms = localStorage.getItem("sms");
+    var formdata = 'username=' + username;
+
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1/22-cen343-nedim-b/getSMSvercode/" + username,
+        data: formdata,
+        cache: false,
+        async: true,
+        success: function (response) {
+            window.location.href = "http://127.0.0.1/22-cen343-nedim-b/welcome.html"
+        },
+
+        error: function (response) {
+            alert(JSON.stringify(response));
+
+
+        }
+    });
+
+    return false;
+
+
+}
+
 function qrCodeCheck() {
 
     var username = localStorage.getItem("user_username");

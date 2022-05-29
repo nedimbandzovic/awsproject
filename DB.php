@@ -122,6 +122,58 @@ $grCodeUri = $otp->getQrCodeUri(
     echo $result;
 }
 
+public static function getSMS ($username){
+  $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");
+  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $query=("SELECT sms FROM users WHERE username='$username'");
+  $sth = $connection->prepare($query);
+  $sth->execute();
+  $result = $sth->fetchColumn();
+  echo $result;
+}
+public static function generate_sms_code($username){
+
+  
+ 
+  $SMScode=(rand(1000,9000));
+  $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $query="UPDATE users SET sms='$SMScode' WHERE username='$username'";
+    $connection->query($query);
+    $data = array(
+      'from' => 'OurPlatform',
+      'text' => 'Your verification code is: '. $SMScode,
+      'to' => '38761648664',
+      'api_key' => 'f68f2ebe',
+      'api_secret' => 'l5B7VZ1xVqWDlHKy'
+ 
+ 
+  );
+  $post_data = json_encode($data);
+   $crl = curl_init('https://rest.nexmo.com/sms/json');
+  curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($crl, CURLINFO_HEADER_OUT, true);
+  curl_setopt($crl, CURLOPT_POST, true);
+  curl_setopt($crl, CURLOPT_POSTFIELDS, $post_data);
+  curl_setopt($crl, CURLOPT_HTTPHEADER, array(
+      'Content-Type: application/json'
+ 
+    )
+  );
+   $result = curl_exec($crl);
+ 
+  if ($result === false) {
+      $result_noti = 0; die();
+  } else {
+ 
+      $result_noti = 1; die();
+  }
+  curl_close($crl);
+ 
+ 
+ 
+}
+
 public static function set_2fa_status ($username, $status){
 
     $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");

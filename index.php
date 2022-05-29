@@ -132,6 +132,17 @@ Flight::route('GET /getQRnumber/@username', function ($username) {
 
 });
 
+Flight::route('GET /getSMScode/@username', function ($username) {
+  DB::generate_sms_code($username);
+  
+
+});
+Flight::route('GET /getSMSvercode/@username', function ($username) {
+  DB::getSMS($username);
+  
+
+});
+
 
 
 
