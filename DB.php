@@ -43,6 +43,42 @@ $result = $mailer->send($message);
     
   }
 
+  public static function get_user_by_email($email){
+    $token=md5(random_bytes(16));
+$connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");
+      $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $query=("UPDATE users SET reset_token='$token' WHERE email='$email'");
+      $sth = $connection->prepare($query);
+      $sth->execute();
+      $result = $sth->fetchColumn();
+     
+      $transport = (new Swift_SmtpTransport('in-v3.mailjet.com', 587))
+  ->setUsername('5fde2e547ac65c2ed99d7a081629e907')
+  ->setPassword('1378421cf8c22f5adf8e05eb3c3653d3')
+;
+
+$mailer = new Swift_Mailer($transport);
+
+$message = (new Swift_Message('Welcome to Our Platform'))
+  ->setFrom(['nedim.bandzovic@stu.ibu.edu.ba' => 'OurPlatform'])
+  ->setTo([$email])
+  ->setBody('You have demanded to reset your password. The token for resetting is: '.$token);
+  ;
+
+// Send the message
+$result = $mailer->send($message);
+  
+  }
+
+  public static function set_new_password($token, $newPassword){
+    $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $query="UPDATE users SET password='$newPassword' WHERE reset_token='$token'";
+    $connection->query($query);
+   
+  
+  }
+
   public static function login ($username, $password){
 
     $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");

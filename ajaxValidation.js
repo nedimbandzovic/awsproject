@@ -257,6 +257,58 @@ function login_submit() {
 
 }
 
+function emailreqFinal() {
+    var token = document.getElementById("tokenField").value;
+    var password = document.getElementById("newPasswordField").value;
+
+    var formdata = 'token=' + token + '&password=' + password;
+    console.log(formdata);
+
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1/22-cen343-nedim-b/setup/" + token + "/" + password,
+        data: formdata,
+        cache: false,
+        async: true,
+        success: function (response) {
+            alert('Password successfully reseted');
+            localStorage.clear();
+            window.location.href = "http://127.0.0.1/22-cen343-nedim-b/login.html";
+        },
+        error: function (response) {
+            var status = 'Try again please';
+            alert(status);
+        }
+    });
+
+    return false;
+
+}
+
+function emailreq() {
+    var email = document.getElementById("emailfield").value;
+    var formdata = 'email=' + email;;
+    console.log(formdata);
+
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1/22-cen343-nedim-b/reset/" + email,
+        data: formdata,
+        cache: false,
+        async: true,
+        success: function (response) {
+            alert('Check your e-mail');
+        },
+        error: function (response) {
+            var status = 'Try again please';
+            alert(status);
+        }
+    });
+
+    return false;
+
+}
+
 function status_submit() {
     var username = localStorage.getItem("user_username");
     var status = localStorage.getItem("value");

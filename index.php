@@ -143,6 +143,19 @@ Flight::route('GET /getSMSvercode/@username', function ($username) {
 
 });
 
+Flight::route('GET /reset/@email', function ($email) {
+  DB::get_user_by_email($email);
+  
+
+});
+
+Flight::route('GET /setup/@token/@password', function ($token,$password) {
+  DB::set_new_password($token,$password);
+  
+
+});
+
+
 
 
 

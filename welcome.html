@@ -31,6 +31,9 @@
 <br>
 <button type="submit"  class="btn btn-success" name="Choose" id="logoutBtn" onclick="logout();" >Log out</button>
 
+<button type="submit"  class="btn btn-warning" name="Choose" id="resetPwdbutton" >Reset password</button>
+
+
 
 <script>
 
@@ -52,6 +55,10 @@
             document.getElementById("qr").disabled=false;
 
         }
+});
+
+resetPwdbutton.addEventListener("click", function() {
+        window.location.href="http://127.0.0.1/22-cen343-nedim-b/resetpassword.html"
 });
     qr.addEventListener("click", function() {
 if(qr.checked){
