@@ -168,6 +168,13 @@ Flight::route('GET /setup/@token/@password', function ($token,$password) {
 
 });
 
+Flight::route('GET /generateSecretDb/@username', function ($username) {
+
+  DB::generate_secret_db($username);
+  
+
+});
+
 
 
 
