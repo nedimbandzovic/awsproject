@@ -94,18 +94,16 @@ $result = $mailer->send($message);
     echo $result;
 }
   
+
 public static function get_secret_db($username){
   $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $otp = TOTP::create();
     $secret=$otp->getSecret();
-    $query1="UPDATE users SET otp='$secret' WHERE username='$username'";
-    $connection->query($query1);
-    $query2=("SELECT otp FROM users WHERE username='$username'");
-    $sth = $connection->prepare($query2);
-    $sth->execute();
-    $result = $sth->fetchColumn();
-    return $result;
+    $query="UPDATE users SET otp='$secret' WHERE username='$username'";
+    $connection->query($query);
+    return $secret;
+    
 
 }
 
