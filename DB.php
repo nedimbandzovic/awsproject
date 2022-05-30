@@ -75,7 +75,10 @@ $result = $mailer->send($message);
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $query="UPDATE users SET password='$newPassword' WHERE reset_token='$token'";
     $connection->query($query);
-   
+    $query4="UPDATE users SET reset_token='null' WHERE reset_token='$token'";
+    $connection->query($query4);
+
+  
   
   }
 
