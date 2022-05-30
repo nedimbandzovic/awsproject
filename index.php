@@ -31,8 +31,7 @@ Flight::route('/hello', function () {
      * )
      */
 Flight::route('POST /register', function () {
-  header("Access-Control-Allow-Origin: *");
-  header("Access-Control-Allow-Headers: Content-Type, origin");
+
     $username=Flight::request()->data->username;
     $password=Flight::request()->data->password;
     $email=Flight::request()->data->email;
@@ -100,8 +99,7 @@ Flight::route('POST /register', function () {
      * )
      */
     Flight::route('POST /login', function () {
-      header("Access-Control-Allow-Origin: *");
-      header("Access-Control-Allow-Headers: Content-Type, origin");
+    
       $username=Flight::request()->data->username;
       $password=Flight::request()->data->password;
       DB::login($username,$password);
@@ -109,71 +107,62 @@ Flight::route('POST /register', function () {
   });
   
   Flight::route('GET /confirm/@token', function ($token) {
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Headers: Content-Type, origin");
+   
     DB::confirm($token);
     
 
 });
 
 Flight::route('GET /confirm/@username/@status', function ($username,$status) {
-  header("Access-Control-Allow-Origin: *");
-  header("Access-Control-Allow-Headers: Content-Type, origin");
+
   DB::set_2fa_status($username,$status);
   
 
 });
 
 Flight::route('GET /get/@username', function ($username) {
-  header("Access-Control-Allow-Origin: *");
-  header("Access-Control-Allow-Headers: Content-Type, origin");
+ 
   DB::get($username);
   
 
 });
 
 Flight::route('GET /getSecret/@username', function ($username) {
-  header("Access-Control-Allow-Origin: *");
-  header("Access-Control-Allow-Headers: Content-Type, origin");
+
   DB::generate_secret($username);
   
 
 });
 
 Flight::route('GET /getQRnumber/@username', function ($username) {
-  header("Access-Control-Allow-Origin: *");
-  header("Access-Control-Allow-Headers: Content-Type, origin");
+
   DB::getQRCode($username);
   
 
 });
 
 Flight::route('GET /getSMScode/@username', function ($username) {
-  header("Access-Control-Allow-Origin: *");
-  header("Access-Control-Allow-Headers: Content-Type, origin");
+ 
   DB::generate_sms_code($username);
   
 
 });
 Flight::route('GET /getSMSvercode/@username', function ($username) {
-  header("Access-Control-Allow-Origin: *");
-  header("Access-Control-Allow-Headers: Content-Type, origin");
+  
   DB::getSMS($username);
   
 
 });
 
 Flight::route('GET /reset/@email', function ($email) {
-  header("Access-Control-Allow-Origin: *");
-  header("Access-Control-Allow-Headers: Content-Type, origin");
+
   DB::get_user_by_email($email);
   
 
 });
 
 Flight::route('GET /setup/@token/@password', function ($token,$password) {
-  header("Access-Control-Allow-Origin: *");
-  header("Access-Control-Allow-Headers: Content-Type, origin");
+
   DB::set_new_password($token,$password);
   
 

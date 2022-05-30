@@ -75,7 +75,7 @@ function verification_submit() {
 
     $.ajax({
         type: "GET",
-        url: "https://nedimsssdproject.herokuapp.com/22-cen343-nedim-b/get/" + username,
+        url: "https://nedimsssdproject.herokuapp.com/get/" + username,
         data: formdata,
         cache: false,
         async: true,
