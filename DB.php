@@ -215,10 +215,8 @@ public static function set_2fa_status ($username, $status){
     $sth->execute();
     $result = $sth->fetchColumn();
     if ($result=='QR'){
-      $otp = TOTP::create();
-    $secret=$otp->getSecret();
-    $quer4y=("UPDATE users SET otp='$secret' WHERE username='$username'");
-    $connection->query($query4);
+      echo 'Hello';
+      
 
 
 
