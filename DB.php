@@ -236,6 +236,8 @@ public static function confirm($token){
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $query="UPDATE users SET status='ENABLED' WHERE check_token='$token'";
    $connection->query($query);
+   $query45="UPDATE users SET reset_token='null' WHERE reset_token='$token'";
+    $connection->query($query45);
    echo "Account confirmation successful, wait for 10 seconds";
 
     header('Refresh: 10; URL=https://nedimsssdproject.herokuapp.com/login.html');
