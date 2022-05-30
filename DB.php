@@ -35,7 +35,7 @@ $mailer = new Swift_Mailer($transport);
 $message = (new Swift_Message('Welcome to Our Platform'))
   ->setFrom(['nedim.bandzovic@stu.ibu.edu.ba' => 'OurPlatform'])
   ->setTo([$email])
-  ->setBody('Welcome to our platform. Please confirm your account by clicking on http://127.0.0.1/22-cen343-nedim-b/confirm/'.$token);
+  ->setBody('Welcome to our platform. Please confirm your account by clicking on https://nedimsssdproject.herokuapp.com/confirm/'.$token);
   ;
 
 // Send the message
@@ -218,7 +218,7 @@ public static function set_2fa_status ($username, $status){
     $connection->query($query);
     echo "Your status is '$status', wait for 10 seconds to be redirected";
 
-    header('Refresh: 10; URL=http://127.0.0.1/22-cen343-nedim-b/login.html');
+    header('Refresh: 10; URL=https://nedimsssdproject.herokuapp.com/login.html');
 
 
     
@@ -231,7 +231,7 @@ public static function confirm($token){
    $connection->query($query);
    echo "Account confirmation successful, wait for 10 seconds";
 
-    header('Refresh: 10; URL=http://127.0.0.1/22-cen343-nedim-b/login.html');
+    header('Refresh: 10; URL=https://nedimsssdproject.herokuapp.com/login.html');
     
     
   }
