@@ -98,8 +98,6 @@ $result = $mailer->send($message);
 public static function get_secret_db($username){
   $connection = new PDO("mysql:host=ibu-sql-2022.adnan.dev;port=3306;dbname=db_nedim", "user_nedim", "IQ642N");
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $otp = TOTP::create();
-    $secret=$otp->getSecret();
     $query="UPDATE users SET otp='$secret' WHERE username='$username'";
     $connection->query($query);
     return $secret;
@@ -210,6 +208,19 @@ public static function set_2fa_status ($username, $status){
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $query="UPDATE users SET 2fa='$status' WHERE username='$username'";
     $connection->query($query);
+    $query=("SELECT 2fa FROM users WHERE username='$username'");
+    $sth = $connection->prepare($query);
+    $sth->execute();
+    $result = $sth->fetchColumn();
+    if ($result=='QR'){
+      $otp = TOTP::create();
+    $secret=$otp->getSecret();
+    $quer4y=("UPDATE users SET otp='$secret' WHERE username='$username'");
+    $connection->query($query4);
+
+
+
+    }
     echo "Your status is '$status', wait for 10 seconds to be redirected";
 
     header('Refresh: 10; URL=https://nedimsssdproject.herokuapp.com/login.html');
