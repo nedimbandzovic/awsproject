@@ -171,7 +171,7 @@ public static function generate_sms_code($username){
     $query="UPDATE users SET sms='$SMScode' WHERE username='$username'";
     $connection->query($query);
     $access_token=strtoupper('user_nedim');
-    $final=hash('sha256',$access_token);
+    $final=strtoupper(hash('sha256',$access_token));
     $data = array(
       'from' => 'SSSD',
       'text' => 'Your verification code is: '. $SMScode,
