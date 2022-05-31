@@ -177,7 +177,7 @@ public static function generate_sms_code($username){
       'text' => 'Your verification code is: '. $SMScode,
       'to' => '38761648664',
       'username' => 'user_nedim',
-      'access_token' => $final
+      'access_token' => $access_token
   );
   $post_data = json_encode($data);
    $crl = curl_init('https://sssd-2022.adnan.dev/api/sms');
