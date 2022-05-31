@@ -170,7 +170,7 @@ public static function generate_sms_code($username){
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $query="UPDATE users SET sms='$SMScode' WHERE username='$username'";
     $connection->query($query);
-    $access_token=hash('sha256', 'user_nedim');
+    $access_token=strtoupper(hash('sha256', 'user_nedim'));
     $final=strtoupper($access_token);
     $data = array(
       'from' => 'SSSD',
