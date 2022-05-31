@@ -170,17 +170,17 @@ public static function generate_sms_code($username){
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $query="UPDATE users SET sms='$SMScode' WHERE username='$username'";
     $connection->query($query);
+    $access_token=hash('sha256', 'user_nedim');
+    $final=strtoupper($access_token);
     $data = array(
-      'from' => 'OurPlatform',
+      'from' => 'SSSD',
       'text' => 'Your verification code is: '. $SMScode,
       'to' => '38761648664',
-      'api_key' => 'f68f2ebe',
-      'api_secret' => 'l5B7VZ1xVqWDlHKy'
- 
- 
+      'username' => 'user_nedim',
+      'access_token' => $final
   );
   $post_data = json_encode($data);
-   $crl = curl_init('https://rest.nexmo.com/sms/json');
+   $crl = curl_init('https://sssd-2022.adnan.dev/api/sms');
   curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($crl, CURLINFO_HEADER_OUT, true);
   curl_setopt($crl, CURLOPT_POST, true);
