@@ -50,7 +50,7 @@ function submit() {
 
     $.ajax({
         type: "POST",
-        url: "https://nedimsssdproject.herokuapp.com/register",
+        url: "https://127.0.0.1/22-cen343-nedim-b/register",
         data: formdata,
         cache: false,
         async: true,
@@ -60,8 +60,6 @@ function submit() {
         },
         error: function (response) {
             alert(JSON.stringify(response));
-
-
         }
     });
 
@@ -75,17 +73,17 @@ function verification_submit() {
 
     $.ajax({
         type: "GET",
-        url: "https://nedimsssdproject.herokuapp.com/get/" + username,
+        url: "https://127.0.0.1/22-cen343-nedim-b/get/" + username,
         data: formdata,
         cache: false,
         async: true,
         success: function (response) {
             if (response == 'SMS') {
-                window.location.href = "https://nedimsssdproject.herokuapp.com/sms.html";
+                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/sms.html";
             } else if (response == 'QR') {
-                window.location.href = "https://nedimsssdproject.herokuapp.com/qrcode.html";
+                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/qrcode.html";
             } else if (response == 'null') {
-                window.location.href = "https://nedimsssdproject.herokuapp.com/welcome.html";
+                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/welcome.html";
 
             }
         },
@@ -108,7 +106,7 @@ function generateSMScode() {
 
     $.ajax({
         type: "GET",
-        url: "https://nedimsssdproject.herokuapp.com/getSMScode/" + username,
+        url: "https://127.0.0.1/22-cen343-nedim-b/getSMScode/" + username,
         data: formdata,
         cache: false,
         async: true,
@@ -135,12 +133,12 @@ function smsCheck() {
 
     $.ajax({
         type: "GET",
-        url: "https://nedimsssdproject.herokuapp.com/getSMSvercode/" + username,
+        url: "https://127.0.0.1/22-cen343-nedim-b/getSMSvercode/" + username,
         data: formdata,
         cache: false,
         async: true,
         success: function (response) {
-            window.location.href = "https://nedimsssdproject.herokuapp.com/welcome.html"
+            window.location.href = "https://127.0.0.1/22-cen343-nedim-b/welcome.html"
         },
 
         error: function (response) {
@@ -163,13 +161,13 @@ function qrCodeCheck() {
 
     $.ajax({
         type: "GET",
-        url: "https://nedimsssdproject.herokuapp.com/getQRnumber/" + username,
+        url: "https://127.0.0.1/22-cen343-nedim-b/getQRnumber/" + username,
         data: formdata,
         cache: false,
         async: true,
         success: function (response) {
             if (response == qrcode) {
-                window.location.href = "https://nedimsssdproject.herokuapp.com/welcome.html";
+                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/welcome.html";
             }
         },
 
@@ -188,7 +186,7 @@ function qrCodeCheck() {
 function logout() {
 
     localStorage.clear();
-    window.location.href = "https://nedimsssdproject.herokuapp.com/login.html";
+    window.location.href = "https://127.0.0.1/22-cen343-nedim-b/login.html";
 
 
 }
@@ -201,7 +199,7 @@ function secret() {
 
     $.ajax({
         type: "GET",
-        url: "https://nedimsssdproject.herokuapp.com/getSecret/" + username,
+        url: "https://127.0.0.1/22-cen343-nedim-b/getSecret/" + username,
         data: formdata,
         cache: false,
         async: true,
@@ -231,17 +229,17 @@ function login_submit() {
 
     $.ajax({
         type: "POST",
-        url: "https://nedimsssdproject.herokuapp.com/login",
+        url: "https://127.0.0.1/22-cen343-nedim-b/login",
         data: formdata,
         cache: false,
         async: true,
         success: function (response) {
             if (response == 'SMS') {
-                window.location.href = "https://nedimsssdproject.herokuapp.com/sms.html";
+                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/sms.html";
             } else if (response == 'QR') {
-                window.location.href = "https://nedimsssdproject.herokuapp.com/qrcode.html";
+                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/qrcode.html";
             } else if (response == 'null') {
-                window.location.href = "https://nedimsssdproject.herokuapp.com/welcome.html";
+                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/welcome.html";
 
             } else {
                 alert('Try again, please');
@@ -266,14 +264,14 @@ function emailreqFinal() {
 
     $.ajax({
         type: "GET",
-        url: "https://nedimsssdproject.herokuapp.com/setup/" + token + "/" + password,
+        url: "https://127.0.0.1/22-cen343-nedim-b/setup/" + token + "/" + password,
         data: formdata,
         cache: false,
         async: true,
         success: function (response) {
             alert('Password successfully reseted');
             localStorage.clear();
-            window.location.href = "https://nedimsssdproject.herokuapp.com/login.html";
+            window.location.href = "https://127.0.0.1/22-cen343-nedim-b/login.html";
         },
         error: function (response) {
             var status = 'Try again please';
@@ -292,7 +290,7 @@ function emailreq() {
 
     $.ajax({
         type: "GET",
-        url: "https://nedimsssdproject.herokuapp.com/reset/" + email,
+        url: "https://127.0.0.1/22-cen343-nedim-b/reset/" + email,
         data: formdata,
         cache: false,
         async: true,
@@ -317,7 +315,7 @@ function status_submit() {
 
     $.ajax({
         type: "GET",
-        url: "https://nedimsssdproject.herokuapp.com/confirm/" + username + "/" + status,
+        url: "https://127.0.0.1/22-cen343-nedim-b/confirm/" + username + "/" + status,
         data: formdata,
         cache: false,
         async: true,
