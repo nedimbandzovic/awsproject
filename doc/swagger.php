@@ -22,7 +22,7 @@ if ($arr[0] == 'swagger.json') {
     } else {
         $base_url = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     }
-    $base_url="http://localhost/22-cen343-nedim-b";
+    $base_url="http://cloudcomputingawsnedimb-env.eba-x2bmepgs.us-east-1.elasticbeanstalk.com";
     $openapi->servers[0]->url = str_replace("doc/swagger.json", "", $base_url);
 
     header('Content-Type: application/json');

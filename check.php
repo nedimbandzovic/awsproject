@@ -16,7 +16,7 @@ $responseData = json_decode($response);
 
 if($responseData->success) {
     echo "Captcha successfully solved, you will be redirected to login page";
-    header('Refresh: 4; URL=https://nedimsssdproject.herokuapp.com/login.html');
+    header('Refresh: 4; URL=http://127.0.0.1/22-cen343-nedim-b/login.html');
 } 
 else {
     echo "Failed";

@@ -72,8 +72,8 @@ function setCookie(){
   var date = new Date();
   date.setTime(date.getTime()+(1*60*1000));
   var expires = "; expires="+date.toGMTString();
-  document.cookie="myusername="+u+expires+";path=https://nedimsssdproject.herokuapp.com/login.html";
-  document.cookie="mypassword="+p+expires+";path=https://nedimsssdproject.herokuapp.com/login.html";
+  document.cookie="myusername="+u+expires+";path=http://127.0.0.1/22-cen343-nedim-b/login.html";
+  document.cookie="mypassword="+p+expires+";path=http://127.0.0.1/22-cen343-nedim-b/login.html";
 
 }
 function getCookie(cname){
@@ -106,7 +106,7 @@ function getcookiedata(){
   event.preventDefault();
 });
 document.getElementById("register_redirect").addEventListener("click", function(event){
-  window.location.href="https://nedimsssdproject.herokuapp.com/register.html";
+  window.location.href="http://127.0.0.1/22-cen343-nedim-b/register.html";
 });
 
 
@@ -118,7 +118,7 @@ document.getElementById("register_redirect").addEventListener("click", function(
 if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
   localStorage.clear();
   alert ('App restarted')
-      window.location.href="https://nedimsssdproject.herokuapp.com/login.html";
+      window.location.href="http://127.0.0.1/22-cen343-nedim-b/login.html";
 }
 
   let CountButtonHomeClicks = 0;

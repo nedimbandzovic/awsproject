@@ -50,7 +50,7 @@ function submit() {
 
     $.ajax({
         type: "POST",
-        url: "https://127.0.0.1/22-cen343-nedim-b/register",
+        url: "http://127.0.0.1/22-cen343-nedim-b/register",
         data: formdata,
         cache: false,
         async: true,
@@ -73,17 +73,17 @@ function verification_submit() {
 
     $.ajax({
         type: "GET",
-        url: "https://127.0.0.1/22-cen343-nedim-b/get/" + username,
+        url: "http://127.0.0.1/22-cen343-nedim-b/get/" + username,
         data: formdata,
         cache: false,
         async: true,
         success: function (response) {
             if (response == 'SMS') {
-                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/sms.html";
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/sms.html";
             } else if (response == 'QR') {
-                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/qrcode.html";
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/qrcode.html";
             } else if (response == 'null') {
-                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/welcome.html";
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/welcome.html";
 
             }
         },
@@ -106,7 +106,7 @@ function generateSMScode() {
 
     $.ajax({
         type: "GET",
-        url: "https://127.0.0.1/22-cen343-nedim-b/getSMScode/" + username,
+        url: "http://127.0.0.1/22-cen343-nedim-b/getSMScode/" + username,
         data: formdata,
         cache: false,
         async: true,
@@ -133,12 +133,12 @@ function smsCheck() {
 
     $.ajax({
         type: "GET",
-        url: "https://127.0.0.1/22-cen343-nedim-b/getSMSvercode/" + username,
+        url: "http://127.0.0.1/22-cen343-nedim-b/getSMSvercode/" + username,
         data: formdata,
         cache: false,
         async: true,
         success: function (response) {
-            window.location.href = "https://127.0.0.1/22-cen343-nedim-b/welcome.html"
+            window.location.href = "http://127.0.0.1/22-cen343-nedim-b/welcome.html"
         },
 
         error: function (response) {
@@ -161,13 +161,13 @@ function qrCodeCheck() {
 
     $.ajax({
         type: "GET",
-        url: "https://127.0.0.1/22-cen343-nedim-b/getQRnumber/" + username,
+        url: "http://127.0.0.1/22-cen343-nedim-b/getQRnumber/" + username,
         data: formdata,
         cache: false,
         async: true,
         success: function (response) {
             if (response == qrcode) {
-                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/welcome.html";
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/welcome.html";
             }
         },
 
@@ -186,7 +186,7 @@ function qrCodeCheck() {
 function logout() {
 
     localStorage.clear();
-    window.location.href = "https://127.0.0.1/22-cen343-nedim-b/login.html";
+    window.location.href = "http://127.0.0.1/22-cen343-nedim-b/login.html";
 
 
 }
@@ -199,7 +199,7 @@ function secret() {
 
     $.ajax({
         type: "GET",
-        url: "https://127.0.0.1/22-cen343-nedim-b/getSecret/" + username,
+        url: "http://127.0.0.1/22-cen343-nedim-b/getSecret/" + username,
         data: formdata,
         cache: false,
         async: true,
@@ -229,17 +229,17 @@ function login_submit() {
 
     $.ajax({
         type: "POST",
-        url: "https://127.0.0.1/22-cen343-nedim-b/login",
+        url: "http://127.0.0.1/22-cen343-nedim-b/login",
         data: formdata,
         cache: false,
         async: true,
         success: function (response) {
             if (response == 'SMS') {
-                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/sms.html";
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/sms.html";
             } else if (response == 'QR') {
-                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/qrcode.html";
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/qrcode.html";
             } else if (response == 'null') {
-                window.location.href = "https://127.0.0.1/22-cen343-nedim-b/welcome.html";
+                window.location.href = "http://127.0.0.1/22-cen343-nedim-b/welcome.html";
 
             } else {
                 alert('Try again, please');
@@ -264,14 +264,14 @@ function emailreqFinal() {
 
     $.ajax({
         type: "GET",
-        url: "https://127.0.0.1/22-cen343-nedim-b/setup/" + token + "/" + password,
+        url: "http://127.0.0.1/22-cen343-nedim-b/setup/" + token + "/" + password,
         data: formdata,
         cache: false,
         async: true,
         success: function (response) {
             alert('Password successfully reseted');
             localStorage.clear();
-            window.location.href = "https://127.0.0.1/22-cen343-nedim-b/login.html";
+            window.location.href = "http://127.0.0.1/22-cen343-nedim-b/login.html";
         },
         error: function (response) {
             var status = 'Try again please';
@@ -290,7 +290,7 @@ function emailreq() {
 
     $.ajax({
         type: "GET",
-        url: "https://127.0.0.1/22-cen343-nedim-b/reset/" + email,
+        url: "http://127.0.0.1/22-cen343-nedim-b/reset/" + email,
         data: formdata,
         cache: false,
         async: true,
@@ -315,7 +315,7 @@ function status_submit() {
 
     $.ajax({
         type: "GET",
-        url: "https://127.0.0.1/22-cen343-nedim-b/confirm/" + username + "/" + status,
+        url: "http://127.0.0.1/22-cen343-nedim-b/confirm/" + username + "/" + status,
         data: formdata,
         cache: false,
         async: true,
