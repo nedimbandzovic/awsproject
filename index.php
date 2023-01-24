@@ -10,6 +10,7 @@ ini_set('display_errors', 0);
 Flight::route('/hello', function () {
   header("Access-Control-Allow-Origin: *");
   header("Access-Control-Allow-Headers: Content-Type, origin");
+  header("Access-Control-Allow-Methods: GET, OPTIONS");
     echo 'Hello to the world from Nedim!';
 });
     /**
@@ -31,6 +32,9 @@ Flight::route('/hello', function () {
      * )
      */
 Flight::route('POST /register', function () {
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Headers: Content-Type, origin");
+  header("Access-Control-Allow-Methods: GET, OPTIONS");
 
     $username=Flight::request()->data->username;
     $password=Flight::request()->data->password;
@@ -99,6 +103,9 @@ Flight::route('POST /register', function () {
      * )
      */
     Flight::route('POST /login', function () {
+      header("Access-Control-Allow-Origin: *");
+      header("Access-Control-Allow-Headers: Content-Type, origin");
+      header("Access-Control-Allow-Methods: GET, OPTIONS");
     
       $username=Flight::request()->data->username;
       $password=Flight::request()->data->password;
@@ -107,6 +114,9 @@ Flight::route('POST /register', function () {
   });
   
   Flight::route('GET /confirm/@token', function ($token) {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Headers: Content-Type, origin");
+    header("Access-Control-Allow-Methods: GET, OPTIONS");
    
     DB::confirm($token);
     
@@ -114,6 +124,9 @@ Flight::route('POST /register', function () {
 });
 
 Flight::route('GET /confirm/@username/@status', function ($username,$status) {
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Headers: Content-Type, origin");
+  header("Access-Control-Allow-Methods: GET, OPTIONS");
 
   DB::set_2fa_status($username,$status);
   
@@ -121,6 +134,9 @@ Flight::route('GET /confirm/@username/@status', function ($username,$status) {
 });
 
 Flight::route('GET /get/@username', function ($username) {
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Headers: Content-Type, origin");
+  header("Access-Control-Allow-Methods: GET, OPTIONS");
  
   DB::get($username);
   
@@ -128,6 +144,9 @@ Flight::route('GET /get/@username', function ($username) {
 });
 
 Flight::route('GET /getSecret/@username', function ($username) {
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Headers: Content-Type, origin");
+  header("Access-Control-Allow-Methods: GET, OPTIONS");
 
   DB::generate_secret($username);
   
@@ -135,6 +154,9 @@ Flight::route('GET /getSecret/@username', function ($username) {
 });
 
 Flight::route('GET /getQRnumber/@username', function ($username) {
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Headers: Content-Type, origin");
+  header("Access-Control-Allow-Methods: GET, OPTIONS");
 
   DB::getQRCode($username);
   
@@ -142,12 +164,18 @@ Flight::route('GET /getQRnumber/@username', function ($username) {
 });
 
 Flight::route('GET /getSMScode/@username', function ($username) {
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Headers: Content-Type, origin");
+  header("Access-Control-Allow-Methods: GET, OPTIONS");
  
   DB::generate_sms_code($username);
   
 
 });
 Flight::route('GET /getSMSvercode/@username', function ($username) {
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Headers: Content-Type, origin");
+  header("Access-Control-Allow-Methods: GET, OPTIONS");
   
   DB::getSMS($username);
   
@@ -155,6 +183,9 @@ Flight::route('GET /getSMSvercode/@username', function ($username) {
 });
 
 Flight::route('GET /reset/@email', function ($email) {
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Headers: Content-Type, origin");
+  header("Access-Control-Allow-Methods: GET, OPTIONS");
 
   DB::get_user_by_email($email);
   
@@ -162,6 +193,9 @@ Flight::route('GET /reset/@email', function ($email) {
 });
 
 Flight::route('GET /setup/@token/@password', function ($token,$password) {
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Headers: Content-Type, origin");
+  header("Access-Control-Allow-Methods: GET, OPTIONS");
 
   DB::set_new_password($token,$password);
   
